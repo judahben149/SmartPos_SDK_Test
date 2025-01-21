@@ -58,14 +58,14 @@ dependencies {
 
     // SmartPos dependencies
     implementation(libs.smartpos.core)
-//    implementation(libs.smartpos.pax)
-    implementation(libs.smartpos.kozen)
+    implementation(libs.smartpos.pax)
+//    implementation(libs.smartpos.kozen)
 
     // Pax Kernel SDK
-//    implementation(files("libs/NeptuneLiteApi_V2.03.00_20180208.jar"))
+    implementation(files("libs/NeptuneLiteApi_V2.03.00_20180208.jar"))
 
     // Kozen EMV library
-    implementation(files("libs/kozen_emv_bundle_mdi_2.41.aar"))
+//    implementation(files("libs/kozen_emv_bundle_mdi_2.41.aar"))
 
 
     testImplementation libs.junit

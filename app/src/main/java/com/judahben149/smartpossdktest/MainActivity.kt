@@ -10,8 +10,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.interswitchng.smartpos.IswPos
-import com.interswitchng.smartpos.KozenDeviceImpl
-import com.interswitchng.smartpos.KozenModuleHelper
+import com.interswitchng.smartpos.emv.pax.services.POSDeviceImpl
 import com.interswitchng.smartpos.shared.errors.NotConfiguredException
 import com.interswitchng.smartpos.shared.models.core.Environment
 import com.interswitchng.smartpos.shared.models.core.POSConfig
@@ -23,7 +22,7 @@ import com.judahben149.smartpossdktest.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), IswPos.IswPaymentCallback {
 
     private val iswPosInstance: IswPos by lazy { IswPos.getInstance() }
-    private val device by lazy { KozenDeviceImpl.create(this.applicationContext) }
+    private val device by lazy { POSDeviceImpl.create(this.applicationContext) }
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity(), IswPos.IswPaymentCallback {
         )
 
         IswPos.setupTerminal(this.application, device, null, config, true)
-        KozenModuleHelper().createModule(this.application)
+//        KozenModuleHelper().createModule(this.application)
 
         IswPos.setDeviceSetialNumber(device.serialNumber())
 
