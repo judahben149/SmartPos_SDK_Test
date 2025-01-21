@@ -1,0 +1,74 @@
+plugins {
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
+}
+
+def secretsProperties = new Properties()
+def secretsFile = rootProject.file('secrets.properties')
+if (secretsFile.exists()) {
+    secretsProperties.load(secretsFile.newInputStream())
+}
+
+android {
+    namespace 'com.judahben149.smartpossdktest'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.judahben149.smartpossdktest"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "CLIENT_ID", "\"${secretsProperties['CLIENT_ID'] ?: ''}\""
+        buildConfigField "String", "CLIENT_SECRET", "\"${secretsProperties['CLIENT_SECRET'] ?: ''}\""
+        buildConfigField "String", "ALIAS", "\"${secretsProperties['ALIAS'] ?: ''}\""
+        buildConfigField "String", "MERCHANT_CODE", "\"${secretsProperties['MERCHANT_CODE'] ?: ''}\""
+        buildConfigField "String", "MERCHANT_TELEPHONE", "\"${secretsProperties['MERCHANT_TELEPHONE'] ?: ''}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        buildConfig true
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
+
+    // SmartPos dependencies
+    implementation(libs.smartpos.core)
+//    implementation(libs.smartpos.pax)
+    implementation(libs.smartpos.kozen)
+
+    // Pax Kernel SDK
+//    implementation(files("libs/NeptuneLiteApi_V2.03.00_20180208.jar"))
+
+    // Kozen EMV library
+    implementation(files("libs/kozen_emv_bundle_mdi_2.41.aar"))
+
+
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+}
