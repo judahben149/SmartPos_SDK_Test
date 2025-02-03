@@ -99,7 +99,12 @@ class MainActivity : AppCompatActivity(), IswPos.IswPaymentCallback {
         val transaction: Transaction = Transaction.Purchase(PaymentType.Card)
 
         try {
-            iswPosInstance.pay(amount, this, transaction)
+            iswPosInstance.pay(
+                amount = amount,
+                activityCallback = this,
+                transaction = transaction,
+                customerReference = "12222113456"
+            )
         } catch (ex: NotConfiguredException) {
             Toast.makeText(this, "Error - Terminal not configured", Toast.LENGTH_LONG).show()
         }
