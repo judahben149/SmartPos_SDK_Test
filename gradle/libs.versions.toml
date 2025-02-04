@@ -11,8 +11,8 @@ activity = "1.8.0"
 constraintlayout = "2.2.0"
 
 #SmartPos dependency versions
-smartposCore = "2.4.3"
-smartposPax = "2.4.3"
+smartposCore = "2.4.4"
+smartposPax = "2.4.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
